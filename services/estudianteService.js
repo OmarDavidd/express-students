@@ -3,7 +3,7 @@ const student = require('../models/estudiante');
 const studentService = {
 	getAllStudent: async () => {
 		try {
-			const data = student.find();
+			const data = await student.find();
 			return {
 				msg: null,
 				data
@@ -16,17 +16,66 @@ const studentService = {
 			}
 		}
 	},
-	getStudentById: (id) => {
-
+	getStudentById: async (id) => {
+		try {
+			const data = await student.findById(id);
+			return {
+				msg: null,
+				data
+			}
+		} catch (error) {
+			console.log(error);
+			return {
+				msg: error,
+				data: []
+			}
+		}
 	},
-	addStudent: (student) => {
-
+	addStudent: async (student) => {
+		try {
+			const newStudent = new student(student);
+			const data = await newStudent.save();
+			return {
+				msg: null,
+				data
+			}
+		} catch (error) {
+			console.log(error);
+			return {
+				msg: error,
+				data: []
+			}
+		}
 	},
-	updateStudent: (id, student) => {
-
+	updateStudent: async (id, student) => {
+		try {
+			const data = await student.findByIdAndUpdate(id, student);
+			return {
+				msg: null,
+				data
+			}
+		} catch (error) {
+			console.log(error);
+			return {
+				msg: error,
+				data: []
+			}
+		}
 	},
-	deleteStudent: (id) => {
-
+	deleteStudent: async (id) => {
+		try {
+			const data = await student.findByIdAndDelete(id);
+			return {
+				msg: null,
+				data
+			}
+		} catch (error) {
+			console.log(error);
+			return {
+				msg: error,
+				data: []
+			}
+		}
 	},
 }
 
