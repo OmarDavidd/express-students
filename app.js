@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const connectDB = require('./db/mongodb');
+const studentRoutes = require('./routes/student');
 require('dotenv').config();
 
 //
@@ -12,6 +13,8 @@ app.use(morgan());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+
+connectDB();
 // set
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -21,6 +24,9 @@ app.get('/', (req, res) => {
 	res.send('Welcome to my mongo proyect');
 
 })
+
+app.get('/student', studentRoutes);
+
 
 // Server
 app.listen(port, () => {

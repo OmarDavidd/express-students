@@ -16,6 +16,7 @@ const estudianteSchema = new mongoose.Schema({
 	},
 	cursos: {
 		type: [String],
+		default: [],
 	}
 }, {
 	timestamps: true,
