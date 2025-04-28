@@ -4,12 +4,11 @@ const studentController = {
 	getAllStudents: async (req, res) => {
 		try {
 			const data = await studentService.getAllStudents();
-			/*
+
 			return res.send({
 				msg: null,
 				data
-			})*/
-			res.send("controller");
+			})
 		} catch (error) {
 			console.log('controller', error);
 
@@ -21,7 +20,6 @@ const studentController = {
 	},
 	addStudent: async (req, res) => {
 		try {
-
 			const data = await studentService.addStudent(req.body);
 			return res.send({
 				msg: null,
@@ -64,6 +62,21 @@ const studentController = {
 			})
 		}
 	},
+	deleteStudent: async (req, res) => {
+		try {
+			const { id } = req.params;
+			const data = await studentService.deleteStudent(id);
+			return res.send({
+				msg: null,
+				data
+			})
+		} catch (error) {
+			return res.send({
+				msg: error,
+				data: null
+			})
+		}
+	}
 
 }
 

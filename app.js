@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 
 })
 
-app.get('/student', studentRoutes);
+app.use('/student', studentRoutes);
 
 
 // Server

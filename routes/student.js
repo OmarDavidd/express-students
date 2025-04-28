@@ -7,6 +7,7 @@ ruta.get('/', studentController.getAllStudents);
 ruta.get('/:id', studentController.getStudentById);
 ruta.post('/', studentController.addStudent);
 ruta.put('/:id', studentController.updateStudent);
+ruta.delete('/:id', studentController.deleteStudent);
 
 
 module.exports = ruta;

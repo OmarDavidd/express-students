@@ -1,9 +1,9 @@
-const student = require('../models/estudiante');
+const Student = require('../models/estudiante');
 
 const studentService = {
 	getAllStudent: async () => {
 		try {
-			const data = await student.find();
+			const data = await Student.find();
 			return data;
 		} catch (error) {
 			console.log(error);
@@ -12,7 +12,11 @@ const studentService = {
 	},
 	getStudentById: async (id) => {
 		try {
-			const data = await student.findById(id);
+			const data = await Student.findById(id);
+			if (!data) {
+				return { msg: `No se encontro el usuario con el id${id}` };
+			}
+
 			return data;
 		} catch (error) {
 			console.log(error);
@@ -21,7 +25,9 @@ const studentService = {
 	},
 	addStudent: async (student) => {
 		try {
-			const newStudent = new student(student);
+			const newStudent = new Student(student);
+			console.log('newStudent', newStudent);
+
 			const data = await newStudent.save();
 			return data;
 		} catch (error) {
@@ -31,7 +37,7 @@ const studentService = {
 	},
 	updateStudent: async (id, student) => {
 		try {
-			const data = await student.findByIdAndUpdate(id, student, { new: true })
+			const data = await Student.findByIdAndUpdate(id, student, { new: true })
 			return data;
 		} catch (error) {
 			console.log(error);
@@ -40,7 +46,7 @@ const studentService = {
 	},
 	deleteStudent: async (id) => {
 		try {
-			const data = await student.findByIdAndDelete(id);
+			const data = await Student.findByIdAndDelete(id);
 			return data;
 		} catch (error) {
 			console.log(error);
