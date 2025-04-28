@@ -34,6 +34,37 @@ const studentController = {
 			})
 		}
 	},
+	getStudentById: async (req, res) => {
+		try {
+			const { id } = req.params;
+			const data = await studentService.getStudentById(id);
+			return res.send({
+				msg: null,
+				data
+			})
+		} catch (error) {
+			return res.send({
+				msg: error,
+				data: null
+			})
+		}
+	},
+	updateStudent: async (req, res) => {
+		try {
+			const { id } = req.params;
+			const data = await studentService.updateStudent(id, req.body);
+			return res.send({
+				msg: null,
+				data
+			})
+		} catch (error) {
+			return res.send({
+				msg: error,
+				data: null
+			})
+		}
+	},
+
 }
 
 module.exports = studentController;

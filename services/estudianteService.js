@@ -4,77 +4,47 @@ const studentService = {
 	getAllStudent: async () => {
 		try {
 			const data = await student.find();
-			return {
-				msg: null,
-				data
-			}
+			return data;
 		} catch (error) {
 			console.log(error);
-			return {
-				msg: error,
-				data: null
-			}
+			return error;
 		}
 	},
 	getStudentById: async (id) => {
 		try {
 			const data = await student.findById(id);
-			return {
-				msg: null,
-				data
-			}
+			return data;
 		} catch (error) {
 			console.log(error);
-			return {
-				msg: error,
-				data: []
-			}
+			return error;
 		}
 	},
 	addStudent: async (student) => {
 		try {
 			const newStudent = new student(student);
 			const data = await newStudent.save();
-			return {
-				msg: null,
-				data
-			}
+			return data;
 		} catch (error) {
 			console.log(error);
-			return {
-				msg: error,
-				data: []
-			}
+			return error;
 		}
 	},
 	updateStudent: async (id, student) => {
 		try {
-			const data = await student.findByIdAndUpdate(id, student);
-			return {
-				msg: null,
-				data
-			}
+			const data = await student.findByIdAndUpdate(id, student, { new: true })
+			return data;
 		} catch (error) {
 			console.log(error);
-			return {
-				msg: error,
-				data: []
-			}
+			return error;
 		}
 	},
 	deleteStudent: async (id) => {
 		try {
 			const data = await student.findByIdAndDelete(id);
-			return {
-				msg: null,
-				data
-			}
+			return data;
 		} catch (error) {
 			console.log(error);
-			return {
-				msg: error,
-				data: []
-			}
+			return error;
 		}
 	},
 }
