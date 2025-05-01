@@ -1,0 +1,43 @@
+<div class="container mx-auto px-4 py-8">
+	<div class="flex justify-between items-center mb-8">
+		<h1 class="text-3xl font-bold text-gray-800">Lista de Estudiantes</h1>
+	</div>
+	<div class="overflow-x-auto shadow-md rounded-lg">
+		<table class="w-full text-sm text-left text-gray-700">
+			<thead class="text-xs uppercase bg-gray-100">
+				<tr>
+					<th class="px-6 py-3">Nombre</th>
+					<th class="px-6 py-3">Apellido</th>
+					<th class="px-6 py-3">Matricula</th>
+					<th class="px-6 py-3">Promedio</th>
+					<th class="px-6 py-3">Cursos</th>
+					<th class="px-6 py-3">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% students.forEach(student=> { %>
+					<tr class="bg-white border-b">
+						<td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+							<%= student.nombre %>
+						</td>
+						<td class="px-6 py-4">
+							<%= student.apellido %>
+						</td>
+						<td class="px-6 py-4">
+							<%= student.matricula %>
+						</td>
+						<td class="px-6 py-4">
+							<%= student.promedio %>
+						</td>
+						<td class="px-6 py-4">
+							<%= student.cursos.join(', ') %></td>
+						<td class="px-6 py-4">
+							<a href="/students/<%= student.id %>" class="text-blue-600 hover:underline">Ver</a>
+						</td>
+					</tr>
+					<% }); %>
+			</tbody>
+		</table>
+	</div>
+
+</div>

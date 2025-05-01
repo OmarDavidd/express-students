@@ -1,7 +1,7 @@
 const Student = require('../models/estudiante');
 
 const studentService = {
-	getAllStudent: async () => {
+	getAllStudents: async () => {
 		try {
 			const data = await Student.find();
 			return data;

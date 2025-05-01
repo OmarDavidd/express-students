@@ -1,0 +1,52 @@
+<div class="bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 p-6">
+	<div class="flex justify-between items-center mb-4">
+		<h3 class="text-xl font-bold text-gray-800">
+			Detalles del Estudiante
+		</h3>
+		<a href="/students" class="text-sm inline-block mb-3 text-gray-500 hover:text-gray-700">
+			← Volver atrás
+		</a>
+	</div>
+	<div class="flex flex-col space-y-4">
+
+		<p class="text-gray-600">
+			<strong>Nombre:</strong>
+			<%= student.nombre %>
+		</p>
+		<p class="text-gray-600">
+			<strong>Apellido:</strong>
+			<%= student.apellido %>
+		</p>
+		<p class="text-gray-600">
+			<strong>Matricula:</strong>
+			<%= student.matricula %>
+		</p>
+		<p class="text-gray-600">
+			<strong>Promedio:</strong>
+			<%= student.promedio %>
+		</p>
+		<p class="text-gray-600">
+			<strong>Cursos:</strong>
+			<%= student.cursos && student.cursos.length> 0 ? student.cursos.join(', ') : 'Ninguno' %>
+		</p>
+
+		<div class="flex space-x-3 mt-2">
+			<a href="/students/update/student/<%= student.id %>"
+				class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+				Editar
+			</a>
+			<form action="/students/<%= student.id %>?_method=DELETE" method="POST" class="inline">
+				<button type="submit" onclick="return confirmarEliminacion()"
+					class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors">
+					Eliminar
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+	function confirmarEliminacion() {
+		return confirm('¿Estás seguro de que deseas eliminar este estudiante? Esta acción no se puede deshacer.');
+	}
+</script>

@@ -1,0 +1,31 @@
+### 1. Obtener todos los estudiantes
+GET http://localhost:3000/student
+Content-Type: application/json
+
+### 2. Crear un nuevo estudiante
+POST http://localhost:3000/student
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+	"apellido": "Pérez",
+	"matricula": "68117463226562649da9949f",
+  "promedio": 8.5
+}
+
+### 3. Obtener un estudiante por ID (reemplaza :id)
+GET http://localhost:3000/student/68117463226562649da9949f
+Content-Type: application/json
+
+### 4. Actualizar un estudiante (reemplaza :id)
+PUT http://localhost:3000/student/68117463226562649da9949f
+Content-Type: application/json
+
+{
+  "nombre": "Juan Pérez Actualizado",
+  "edad": 23
+}
+
+### 5. Eliminar un estudiante (reemplaza :id)
+DELETE http://localhost:3000/student/68117463226562649da9949f
+Content-Type: application/json
