@@ -4,53 +4,58 @@ const studentService = {
 	getAllStudents: async () => {
 		try {
 			const data = await Student.find();
-			return data;
+			if (!data) {
+				return { msg: 'No se encontraron estudiantes', data: null };
+			}
+			return { msg: null, data }
 		} catch (error) {
-			console.log(error);
-			return error;
+			return { msg: error, data: null };
 		}
 	},
 	getStudentById: async (id) => {
 		try {
 			const data = await Student.findById(id);
 			if (!data) {
-				return { msg: `No se encontro el usuario con el id${id}` };
+				return { msg: `No se encontro el estudiante con el id ${id}`, data: null };
 			}
-
-			return data;
+			return { msg: null, data }
 		} catch (error) {
-			console.log(error);
-			return error;
+			return { msg: error, data: null };
 		}
 	},
 	addStudent: async (student) => {
 		try {
 			const newStudent = new Student(student);
-			console.log('newStudent', newStudent);
 
 			const data = await newStudent.save();
-			return data;
+			if (!data) {
+				return { msg: 'No se pudo agregar el estudiante', data: null };
+			}
+			return { msg: null, data }
 		} catch (error) {
-			console.log(error);
-			return error;
+			return { msg: error, data: null };
 		}
 	},
 	updateStudent: async (id, student) => {
 		try {
 			const data = await Student.findByIdAndUpdate(id, student, { new: true })
-			return data;
+			if (!data) {
+				return { msg: `No se encontro el estudiante con el id ${id}`, data: null };
+			}
+			return { msg: null, data }
 		} catch (error) {
-			console.log(error);
-			return error;
+			return { msg: error, data: null };
 		}
 	},
 	deleteStudent: async (id) => {
 		try {
 			const data = await Student.findByIdAndDelete(id);
-			return data;
+			if (!data) {
+				return { msg: `No se encontro el estudiante con el id ${id}`, data: null };
+			}
+			return { msg: null, data }
 		} catch (error) {
-			console.log(error);
-			return error;
+			return { msg: error, data: null };
 		}
 	},
 }

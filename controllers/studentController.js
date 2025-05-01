@@ -5,13 +5,13 @@ const studentController = {
 	getAllStudents: async (req, res) => {
 		try {
 			const data = await studentService.getAllStudents();
+			if (data.msg) {
+				return res.render('Error404', { title: 'Error', error: data.msg });
+			}
 
-			return res.render('students/allStudents', { title: 'Get all students', students: data });
+			return res.render('students/allStudents', { title: 'Get all students', students: data.data });
 		} catch (error) {
-			return res.send({
-				msg: error,
-				data: null
-			})
+			return res.render('Error404', { title: 'Error', error: error });
 		}
 	},
 	getFormStudent: async (req, res) => {
@@ -21,7 +21,10 @@ const studentController = {
 		try {
 			const { id } = req.params;
 			const data = await studentService.getStudentById(id);
-			return res.render('students/formStudent', { title: 'Actualizar student', student: data });
+			if (data.msg) {
+				return res.render('Error404', { title: 'Error', error: data.msg });
+			}
+			return res.render('students/formStudent', { title: 'Actualizar student', student: data.data });
 		} catch (error) {
 			return res.send({
 				msg: error,
@@ -32,35 +35,37 @@ const studentController = {
 	addStudent: async (req, res) => {
 		try {
 			const data = await studentService.addStudent(req.body);
-			if (data) {
-				return res.redirect('/students');
+			if (data.msg) {
+				return res.render('Error404', { title: 'Error', error: data.msg });
 			}
+
+			return res.redirect('/students');
+
 		} catch (error) {
-			return res.send({
-				msg: error,
-				data: null
-			})
+			return res.render('Error404', { title: 'Error', error: error });
 		}
 	},
 	getStudentById: async (req, res) => {
 		try {
 			const { id } = req.params;
 			const data = await studentService.getStudentById(id);
-			return res.render('students/getStudent', { title: 'Get student by id', student: data });
+			if (data.msg) {
+				return res.render('Error404', { title: 'Error', error: data.msg });
+			}
+			return res.render('students/getStudent', { title: 'Get student by id', student: data.data });
 		} catch (error) {
-			return res.send({
-				msg: error,
-				data: null
-			})
+			return res.render('Error404', { title: 'Error', error: error });
 		}
 	},
 	updateStudent: async (req, res) => {
 		try {
 			const { id } = req.params;
 			const data = await studentService.updateStudent(id, req.body);
-			if (data) {
-				return res.redirect('/students');
+			if (data.msg) {
+				return res.render('Error404', { title: 'Error', error: data.msg });
 			}
+			return res.redirect('/students');
+
 		} catch (error) {
 			return res.send({
 				msg: error,
@@ -72,17 +77,14 @@ const studentController = {
 		try {
 			const { id } = req.params;
 			const data = await studentService.deleteStudent(id);
-			console.log('data', data);
-
-			if (data) {
-				return res.redirect('/students');
+			if (data.msg) {
+				return res.render('Error404', { title: 'Error', error: data.msg });
 			}
-			return res.render('Error404', { title: 'Error', error: 'No se encontro el usuario con el id' });
+
+			return res.redirect('/students');
+
 		} catch (error) {
-			return res.send({
-				msg: error,
-				data: null
-			})
+			return res.render('Error404', { title: 'Error', error: error });
 		}
 	}
 
